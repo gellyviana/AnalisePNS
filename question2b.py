@@ -15,8 +15,9 @@ listaCities = []
 for row in range(sheet.nrows):
         estado = sheet.cell_value(row, 1)
         if estado == 'Rio Grande do Norte':
-            microregiao=sheet.cell_value(row, 5)
-            if microregiao == 'Seridó Oriental' or microregiao=='Seridó Ocidental':
+            microregiao1=sheet.cell_value(row, 3)
+            microregiao2=sheet.cell_value(row, 5)
+            if microregiao1 == 'Leste Potiguar' and microregiao2=='Natal':
                 #print(microregiao)
                 listaCities.append(str(sheet.cell(row, 8))[5:])
 
