@@ -1,4 +1,4 @@
-#encoding: latin-1
+#encoding: utf-8
 
 import pandas as pd
 import numpy as np
@@ -18,20 +18,30 @@ listasoma.sort()
 listasoma.reverse()
 
 listaCidade=[]
-listaCidade.append((data_set['Município'])[listaAux.index(listasoma[0])])
-listaCidade.append((data_set['Município'])[listaAux.index(listasoma[1])])
-listaCidade.append((data_set['Município'])[listaAux.index(listasoma[2])])
+listaCidade.append((data_set['Município'])[listaAux.index(listasoma[0])][7:])
+listaCidade.append((data_set['Município'])[listaAux.index(listasoma[1])][7:])
+listaCidade.append((data_set['Município'])[listaAux.index(listasoma[2])][7:])
 
-#Grafico
-#plt.title ('Três primeiros municípios com maiores numero de Nascimento.')
-y_axis = [listasoma[0],listasoma[1],listasoma[2]]
-x_axis = [listaCidade[0],listaCidade[1],listaCidade[2]]
 
-width_n = 0.4
-bar_color = 'pink'
+n_groups = 3
 
-#plt.bar(x_axis, y_axis, width=width_n,color=bar_color)
-plt.xticks([1, 2, 3, 4, 5, 6], ['Vá1', 'V2', 'V3', 'V4', 'V5', 'V6'])
+means_men = (listasoma[0],listasoma[1],listasoma[2])
 
-data_set.plot()
+index = np.arange(n_groups)
+bar_width = 0.35
+
+opacity = 0.4
+error_config = {'ecolor': '0.3'}
+
+rects1 = plt.bar(index, means_men, bar_width,
+                 alpha=opacity,
+                 color='b',
+                 error_kw=error_config)
+
+
+plt.xlabel('Regiões')
+plt.ylabel('Proporções')
+plt.title('Proporção por Região')
+plt.xticks(index + bar_width, tuple(listaCidade))
+
 plt.show()
